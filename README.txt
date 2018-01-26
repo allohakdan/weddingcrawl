@@ -4,8 +4,6 @@ Some modifications based on work by [Bruno Orlandi and Nihey Takizawa](https://g
 
 Adapted for use as the Ultimate Weapon by Dan Brooks and Vicki Crosson.
 
-Star Parallax effect by by @screenshake
-linkedin.com/in/saranshsinha
-https://codepen.io/saransh/pen/BKJun
+Stars by Blindman67 - https://stackoverflow.com/a/44493489
 
 Sound copyright by The Walt Disney Company.
