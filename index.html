@@ -9,7 +9,18 @@
   
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/randomstars.css"/>
+      <script language="javascript">
+    function showStars(){
+        document.getElementById("canvas").setAttribute("style","display: block;");
+        console.log("starson");
+    }
+    function starsOff(){
+        document.getElementById("canvas").setAttribute("style","display: none;");
+        console.log("starsoff");
+    }
 
+
+    </script>
  
 </head>
 
@@ -21,7 +32,7 @@
     <source src="https://s.cdpn.io/1202/Star_Wars_original_opening_crawl_1977.mp3" type="audio/mpeg" />
   </audio>
   
-  <section class="start" onmouseover="showStars()" onmouseout="starsOff()">
+  <section class="start"> <!--onmouseover="showStars()" onmouseout="starsOff()"-->
     <p>
       Celebrate the wedding of <br> <span>Dan Brooks &amp; Vicki Crosson</span> <br> June 23rd, 2018
       <br>
