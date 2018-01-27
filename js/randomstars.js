@@ -1,24 +1,24 @@
 const ctx = canvas.getContext("2d");
 
-// creates a random integer between min and max. If min only given the between 0 and the value
+// creates a random integer between min and min somehow?
 function randomInt(min) {
   max = min + (min = 0);
   return (Math.random() * (max - min) + min) | 0;
 }
 
-// same as above but as floats.
+// same as above but as floats I guess?
 function randomFloat(min) {
   max = min + (min = 0);
   return Math.random() * (max - min) + min;
 }
 
-// creates a 2d point at x,y. If only x is a point than set to that point
-function point(x=0, y){
+// creates a 2d point at x,y.
+function point(x, y){
   if (x.x && y === undefined) {return { x: x.x,y: x.y} }
   return {x,y: y === undefined ? 0 : y }
 }
 
-function ease (time, amount = 2) { return Math.pow(time % 1,amount) };
+//function ease (time, amount = 2) { return Math.pow(time % 1,amount) };
 
 // stuff for stars
 const skyColour = [10,30,50];
