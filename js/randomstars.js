@@ -1,9 +1,15 @@
 const ctx = canvas.getContext("2d");
 
-// creates a random integer between min and max. If min only given the between 0 and the value 
-const randI = (min, max = min + (min = 0)) => (Math.random() * (max - min) + min) | 0;
+// creates a random integer between min and max. If min only given the between 0 and the value
+function randomInt(min, max = min + (min = 0)) {
+  return (Math.random() * (max - min) + min) | 0;
+}
+
 // same as above but as floats.
-const rand = (min, max = min + (min = 0)) => Math.random() * (max - min) + min;
+function randomFloat(min, max = min + (min = 0)) {
+  return Math.random() * (max - min) + min;
+}
+
 // creates a 2d point at x,y. If only x is a point than set to that point
 function point(x=0, y){
   if (x.x && y === undefined) {return { x: x.x,y: x.y} }
@@ -46,11 +52,11 @@ function createStar(pos) {
   stars.push(Object.assign({}, star, {
     pos,
     col: "#ccc",
-    count: randI(colourChangeRate),
-    size: rand(1) * rand(1) * 2 + 0.5,
-    red: 1-(rand(1) * rand(1) *rand(1)),  // reduces colour channels
-    green: 1-(rand(1) * rand(1) *rand(1)), // but only by a very small amount
-    blue: 1-(rand(1) * rand(1) *rand(1)),  // most of the time but occasional 
+    count: randomInt(colourChangeRate),
+    size: randomFloat(1) * randomFloat(1) * 2 + 0.5,
+    red: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // reduces colour channels
+    green: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)), // but only by a very small amount
+    blue: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // most of the time but occasional
                                            // star will have a distinct colour
   }));
 }
@@ -71,7 +77,7 @@ function mainLoop(time) {
     // create the random stars;
     var star = 0;
     while (star < starCount) {
-      createStar(point(randI(canvas.width), randI(canvas.height)));
+      createStar(point(randomInt(canvas.width), randomInt(canvas.height)));
       star++;
     }
     skyGrad = ctx.createLinearGradient(0,0,0,canvas.height);
