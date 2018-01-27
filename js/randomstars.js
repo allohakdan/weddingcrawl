@@ -50,16 +50,22 @@ const star = {
 // create a random star
 // the size is calculated to produce many more smaller stars than big
 function createStar(pos) {
-  stars.push(Object.assign({}, star, {
-    pos,
-    col: "#ccc",
-    count: randomInt(colourChangeRate),
-    size: randomFloat(1) * randomFloat(1) * 2 + 0.5,
-    red: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // reduces colour channels
-    green: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)), // but only by a very small amount
-    blue: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // most of the time but occasional
-                                           // star will have a distinct colour
-  }));
+  stars.push(
+    Object.assign(
+      {},
+      star,
+      {
+        pos: pos,
+        col: "#ccc",
+        count: randomInt(colourChangeRate),
+        size: randomFloat(1) * randomFloat(1) * 2 + 0.5,
+        red: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // reduces colour channels
+        green: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)), // but only by a very small amount
+        blue: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // most of the time but occasional
+                                               // star will have a distinct colour
+      }
+    )
+  );
 }
 
 var starCount;
@@ -76,10 +82,10 @@ function mainLoop(time) {
     // density is number of pixels one the canvas that has one star
     starCount = Math.floor((canvas.width * canvas.height) / density);
     // create the random stars;
-    var star = 0;
-    while (star < starCount) {
+    var s = 0;
+    while (s < starCount) {
       createStar(point(randomInt(canvas.width), randomInt(canvas.height)));
-      star++;
+      s++;
     }
     skyGrad = ctx.createLinearGradient(0,0,0,canvas.height);
     skyGrad.addColorStop(0,"black");
@@ -103,10 +109,10 @@ function mainLoop(time) {
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  star = 0;
-  while (star < starCount) {
-    stars[star].draw();
-    star++;
+  s = 0;
+  while (s < starCount) {
+    stars[s].draw();
+    s++;
   }
 
   requestAnimationFrame(mainLoop);
