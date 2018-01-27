@@ -50,22 +50,26 @@ const star = {
 // create a random star
 // the size is calculated to produce many more smaller stars than big
 function createStar(pos) {
-  stars.push(
-    Object.assign(
-      {},
-      star,
-      {
-        pos: pos,
-        col: "#ccc",
-        count: randomInt(colourChangeRate),
-        size: randomFloat(1) * randomFloat(1) * 2 + 0.5,
-        red: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // reduces colour channels
-        green: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)), // but only by a very small amount
-        blue: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // most of the time but occasional
-                                               // star will have a distinct colour
-      }
-    )
-  );
+  var objs = [{}, star,
+    {
+      pos: pos,
+      col: "#ccc",
+      count: randomInt(colourChangeRate),
+      size: randomFloat(1) * randomFloat(1) * 2 + 0.5,
+      red: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // reduces colour channels
+      green: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)), // but only by a very small amount
+      blue: 1-(randomFloat(1) * randomFloat(1) *randomFloat(1)),  // most of the time but occasional
+                                             // star will have a distinct colour
+    }
+  ];
+  result =  objs.reduce(function (r, o) {
+      Object.keys(o).forEach(function (k) {
+          r[k] = o[k];
+      });
+      return r;
+  }, {});
+
+  stars.push(result);
 }
 
 var starCount;
