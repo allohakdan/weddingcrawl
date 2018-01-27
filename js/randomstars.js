@@ -24,9 +24,10 @@ const skyColour = [10,30,50];
 const density = 1000; // number of star per every density pixels
 const colourChangeRate = 16; // Time in frames to change a colour
 const stars = [];
-const star = { // define a star
-  draw() {
-    this.count += 1; // integer counter used to triger color change every 16 frames
+
+const star = {
+  draw: function() {
+    this.count += 1; // integer counter used to trigger color change every 16 frames
     if (this.count % colourChangeRate === 0) { // change colour ?
       // colour is a gaussian distribution (NOT random) centered at #888
       var c = (Math.random() + Math.random() + Math.random() + Math.random()) * 4;
@@ -34,7 +35,6 @@ const star = { // define a star
       str += Math.floor(c * this.red).toString(16); // change color
       str += Math.floor(c * this.green).toString(16); // change color
       str += Math.floor(c * this.blue).toString(16); // change color
-      
 
       this.col = str;
     }
