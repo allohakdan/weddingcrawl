@@ -1,25 +1,23 @@
 const ctx = canvas.getContext("2d");
-// function calls a callback count times. Saves typing out for loops all the time 
-const doFor = (count, callback) => {
-  var i = 0;
-  while (i < count) {
-    callback(i++)
-  }
-};
+// function calls a callback count times. Saves typing out for loops all the time
+function doFor(count, callback) {
+    var i = 0;
+    while (i < count) {
+      callback(i++)
+    }
+}
+
 // creates a random integer between min and max. If min only given the between 0 and the value 
 const randI = (min, max = min + (min = 0)) => (Math.random() * (max - min) + min) | 0;
 // same as above but as floats.
 const rand = (min, max = min + (min = 0)) => Math.random() * (max - min) + min;
 // creates a 2d point at x,y. If only x is a point than set to that point
-const point = (x = 0, y) => {
+function point(x=0, y){
   if (x.x && y === undefined) {return { x: x.x,y: x.y} }
   return {x,y: y === undefined ? 0 : y }
-};
+}
+
 function ease (time, amount = 2) { return Math.pow(time % 1,amount) };
-const clamp = (v, min = 1,max = min + (min = 0)) => v < min ? min : v > max ? max : v;
-
-
-
 
 // stuff for stars
 const skyColour = [10,30,50];
@@ -30,7 +28,7 @@ const star = { // define a star
   draw() {
     this.count += 1; // integer counter used to triger color change every 16 frames
     if (this.count % colourChangeRate === 0) { // change colour ?
-      // colour is a gaussian distrabution (NOT random) centered at #888
+      // colour is a gaussian distribution (NOT random) centered at #888
       var c = (Math.random() + Math.random() + Math.random() + Math.random()) * 4;
       var str = "#";
       str += Math.floor(c * this.red).toString(16); // change color
@@ -42,7 +40,7 @@ const star = { // define a star
     }
     ctx.fillStyle = this.col;
     // move star around  a pixel. Again its not random
-    // but a gaussian distrabution. The movement is sub pixel and will only
+    // but a gaussian distribution. The movement is sub pixel and will only
     // make the stars brightness vary not look like its moving
     var ox = (Math.random() + Math.random() + Math.random() + Math.random()) / 4;
     var oy = (Math.random() + Math.random() + Math.random() + Math.random()) / 4;
@@ -50,7 +48,7 @@ const star = { // define a star
   }
 }
 // create a random star
-// the size is caculated to produce many more smaller stars than big
+// the size is calculated to produce many more smaller stars than big
 function createStar(pos) {
   stars.push(Object.assign({}, star, {
     pos,
@@ -69,7 +67,7 @@ var skyGrad;
 
 // render the stars
 function mainLoop(time) {
-  // resize canva if page size changes
+  // resize canvas if page size changes
   if (canvas.width !== innerWidth || canvas.height !== innerHeight) {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
@@ -78,6 +76,9 @@ function mainLoop(time) {
     // density is number of pixels one the canvas that has one star
     starCount = Math.floor((canvas.width * canvas.height) / density);
     // create the random stars;
+    function anonFn() {
+      createStar(point(randI(canvas.width), randI(canvas.height)));
+    }
     doFor(starCount, () => createStar(point(randI(canvas.width), randI(canvas.height))));
     skyGrad = ctx.createLinearGradient(0,0,0,canvas.height);
     skyGrad.addColorStop(0,"black");
@@ -100,6 +101,9 @@ function mainLoop(time) {
   }
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  function anonFnI(i){
+    stars[i].draw()
+  }
   doFor(starCount, (i) => stars[i].draw());
 
   requestAnimationFrame(mainLoop);
