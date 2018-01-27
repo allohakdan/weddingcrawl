@@ -1,11 +1,4 @@
 const ctx = canvas.getContext("2d");
-// function calls a callback count times. Saves typing out for loops all the time
-function doFor(count, callback) {
-    var i = 0;
-    while (i < count) {
-      callback(i++)
-    }
-}
 
 // creates a random integer between min and max. If min only given the between 0 and the value 
 const randI = (min, max = min + (min = 0)) => (Math.random() * (max - min) + min) | 0;
@@ -76,10 +69,11 @@ function mainLoop(time) {
     // density is number of pixels one the canvas that has one star
     starCount = Math.floor((canvas.width * canvas.height) / density);
     // create the random stars;
-    function anonFn() {
+    var star = 0;
+    while (star < starCount) {
       createStar(point(randI(canvas.width), randI(canvas.height)));
+      star++;
     }
-    doFor(starCount, () => createStar(point(randI(canvas.width), randI(canvas.height))));
     skyGrad = ctx.createLinearGradient(0,0,0,canvas.height);
     skyGrad.addColorStop(0,"black");
     /* [db] removed the lines below to make it look like space! */
@@ -101,10 +95,12 @@ function mainLoop(time) {
   }
   ctx.fillStyle = skyGrad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  function anonFnI(i){
-    stars[i].draw()
+
+  star = 0;
+  while (star < starCount) {
+    stars[star].draw();
+    star++;
   }
-  doFor(starCount, (i) => stars[i].draw());
 
   requestAnimationFrame(mainLoop);
 }
