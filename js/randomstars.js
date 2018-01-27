@@ -1,12 +1,14 @@
 const ctx = canvas.getContext("2d");
 
 // creates a random integer between min and max. If min only given the between 0 and the value
-function randomInt(min, max = min + (min = 0)) {
+function randomInt(min) {
+  max = min + (min = 0);
   return (Math.random() * (max - min) + min) | 0;
 }
 
 // same as above but as floats.
-function randomFloat(min, max = min + (min = 0)) {
+function randomFloat(min) {
+  max = min + (min = 0);
   return Math.random() * (max - min) + min;
 }
 
