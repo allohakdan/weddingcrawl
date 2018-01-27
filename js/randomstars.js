@@ -14,8 +14,7 @@ function randomFloat(min) {
 
 // creates a 2d point at x,y.
 function point(x, y){
-  if (x.x && y === undefined) {return { x: x.x,y: x.y} }
-  return {x,y: y === undefined ? 0 : y }
+  return {x,y};
 }
 
 //function ease (time, amount = 2) { return Math.pow(time % 1,amount) };
